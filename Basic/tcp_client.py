@@ -69,7 +69,7 @@ class MonitorResource:
             # Convert dict to bytes and Send data
             print('Send Type :', type(message))             # type : dict
             print('Sending: ', message)
-            self.sock.sendall(json.dumps(message))      # type : bytes
+            self.sock.sendall(json.dumps(message).encode())      # type : bytes
 
             # Receive data
             recv_bytes_data = self.sock.recv(4096)               # type : bytes

@@ -45,7 +45,7 @@ class ConnectSocket(asyncore.dispatcher):
             index += 1
 
         # Closed client address and port 출력
-        print("Closed from : ", self.server.remote_clients[i].addr)
+        print("Closed from : ", self.server.remote_clients[index].addr)
 
         # 인덱스에 해당하는 Entry를 삭제
         del(self.server.remote_clients[index])
