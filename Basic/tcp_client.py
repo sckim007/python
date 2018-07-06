@@ -23,7 +23,7 @@ class MonitorResource:
         #print(sys.stderr, 'connecting to %s' % server)
         try:
             print("Connecting to ", server)
-            self.sock.connect(('localhost', 10000))
+            self.sock.connect(server)
         #except socket.error as msg:
         except Exception as msg:
             print("Couldnt connect with the socket-server: %s\n terminating program" % msg)
@@ -67,26 +67,29 @@ class MonitorResource:
     def send_data_dict_2_json(self, message):
         try:
             # Convert dict to bytes and Send data
-            print('Send Type :', type(message))             # type : dict
-            print('Sending: ', message)
-            self.sock.sendall(json.dumps(message).encode())      # type : bytes
+            send_byte_data = json.dumps(message).encode()
+            # Send data
+            print('Send :', send_byte_data)
+            self.sock.sendall(send_byte_data)      # type : bytes
 
             # Receive data
-            recv_bytes_data = self.sock.recv(4096)               # type : bytes
+            recv_bytes_data = self.sock.recv(4096)          # type : bytes
+            print('Recv :', recv_bytes_data)
             recv_dict_data = json.loads(recv_bytes_data)    # type : dict
-            print('Received: ', recv_dict_data)
-        finally:
-            print(sys.stderr, 'closing socket')
-            self.sock.close()
+
+        except Exception as msg:
+            print("Send/Recv : %s\n terminating program" % msg)
+            sys.exit(1)
 
     def run(self):
-
         while True:
             result_dict, result_str = self.scan_resource()
-            print(">> dictionary : ", result_dict)
-            print(">> string     : ", result_str)
+            #print(">> dictionary : ", result_dict)
+            #print(">> string     : ", result_str)
             self.send_data_dict_2_json(result_dict)
-            time.sleep(1)
+            #time.sleep(1)
+
+        self.sock.close()
 
 if __name__ == '__main__':
     #data = read_json_data()
@@ -96,12 +99,3 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, mon.signal_handler)
     signal.signal(signal.SIGTERM, mon.signal_handler)
     mon.run()
-    '''
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_address = ('localhost', 10000)
-    try:
-        sock.connect(server_address)
-    except Exception as msg:
-        print("Couldnt connect with the socket-server: %s\n terminating program" % msg)
-        sys.exit(1)
-    '''
