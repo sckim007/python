@@ -8,6 +8,13 @@ start = time.time()
 time.sleep(1)
 print("took time : ", str(time.time() - start))
 
+import psutil
+n_c = tuple(psutil.disk_io_counters())
+n_c = [(100.0*n_c[i+1]) / n_c[i] for i in range(0, len(n_c), 2)]
+print("----------------")
+print(n_c)
+print("----------------")
+
 class MonitorResource:
 
     def signal_handler(self, signal, frame):
