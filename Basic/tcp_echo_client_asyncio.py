@@ -48,11 +48,13 @@ class EchoClientProtocol(asyncio.Protocol):
     def data_send(self):
         self.transport.write(self.message.encode())
         self.send_count += 1
-        print('Data sent: {!r}, sent_count: {}'.format(self.message, self.send_count))
+        if self.send_count % 10000 == 0:
+            print('Data sent: {!r}, sent_count: {}'.format(self.message, self.send_count))
 
     def data_received(self, data):
         self.recv_count += 1
-        print('Data received: {!r}'.format(data.decode(), self.recv_count))
+        if self.recv_count % 10000 == 0:
+            print('Data received: {!r}'.format(data.decode(), self.recv_count))
         self.data_send()
 
     def connection_lost(self, exc):
