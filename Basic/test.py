@@ -1,34 +1,82 @@
 '''
-파일, 라인 출력
+import wmi
+
+computer = wmi.WMI()
+computer_info = computer.Win32_ComputerSystem()[0]
+os_info = computer.Win32_OperatingSystem()[0]
+proc_info = computer.Win32_Processor()[0]
+gpu_info = computer.Win32_VideoController()[0]
+
+print("os_info: ", os_info)
+print("proc_info: ", proc_info)
+print("gpu_info: ", gpu_info)
+
+os_name = os_info.Name.encode('utf-8').split(b'|')[0]
+os_version = ' '.join([os_info.Version, os_info.BuildNumber])
+system_ram = float(os_info.TotalVisibleMemorySize) / 1048576  # KB to GB
+
+print('OS Name: {0}'.format(os_name.decode()))
+print('OS Version: {0}'.format(os_version))
+print('CPU: {0}'.format(proc_info.Name))
+print('RAM: {0} GB'.format(system_ram))
+print('Graphics Card: {0}'.format(gpu_info.Name))
 '''
-import inspect
-
-print("File : ", inspect.currentframe().filename)
-print("Line : ", inspect.currentframe().f_lineno)
-
 
 '''
-Pack/Unpack Example
+import multiprocessing
+#import os
+#import ssl
+
+def main():
+    server_process = multiprocessing.Process(target=server, name='server')
+    server_process.start()
+
+    client_process = multiprocessing.Process(target=client, name='client')
+    client_process.start()
+
+def client():
+    i = 0;
+    while True:
+        i += 1
+        print("Client: ", i)
+
+def server():
+    i = 0;
+    while True:
+        i += 1
+        print("Server: ", i)
+
+if __name__ == "__main__":
+    main()
 '''
-import struct
 
-var = struct.pack('hhl', 5, 10, 15)
-print(var)
+import threading
+from time import sleep, ctime
 
-var = struct.pack('iii', 10, 20, 30)
-print(var)
+loops = [8,2]
 
-var_dict = dict()
-var_dict['aa'] = 100
-var_dict['bb'] = 200
-print(var_dict)
-
-var_10 = 10
-var_20 = 20
-
-bb = bytes('abcd'.encode())
-print(bb)
-
-pack_var = struct.pack('ib', var_10, bb)
+def loop(nloop,nsec):
+    print('start loop', nloop, 'at:',ctime())
+    sleep(nsec)
+    print('loop', nloop, 'at:', ctime())
 
 
+def test() :
+    print('starting at:', ctime())
+    threads = []
+    nloops = range(len(loops))
+
+    for i in nloops:
+        t = threading.Thread(target=loop,args=(i, loops[i]))
+        threads.append(t)
+
+    for i in nloops:
+        threads[i].start()
+
+    for i in nloops:
+        threads[i].join()
+
+    print('all Done at: ', ctime())
+
+if  __name__ == '__main__' :
+   test()
