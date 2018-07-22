@@ -1,0 +1,56 @@
+python virtualenv 가상환경
+
+1. pip3 인스톨러 설치
+sckim007@sckim007-X360:~$ sudo apt install python3-pip
+
+2. pip3 인스톨러 버전 확인
+sckim007@sckim007-X360:~$ pip3 --version
+pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)
+
+3. python3.6 설치 확인
+sckim007@sckim007-X360:~$ python3
+Python 3.6.5 (default, Apr  1 2018, 05:46:30) 
+[GCC 7.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+
+4. virtualenv 패키지 설치
+sckim007@sckim007-X360:~$ sudo pip3 install virtualenv
+Collecting virtualenv
+  Downloading https://files.pythonhosted.org/packages/b6/30/96a02b2287098b23b875bc8c2f58071c35d2efe84f747b64d523721dc2b5/virtualenv-16.0.0-py2.py3-none-any.whl (1.9MB)
+    100% |████████████████████████████████| 1.9MB 274kB/s 
+Installing collected packages: virtualenv
+Successfully installed virtualenv-16.0.0
+
+4. 가상환경 생성
+sckim007@sckim007-X360:~$ virtualenv venv
+Using base prefix '/usr'
+New python executable in /home/sckim007/venv/bin/python3
+Also creating executable in /home/sckim007/venv/bin/python
+Installing setuptools, pip, wheel...done.
+
+4. 가상환경 확인(venv 디렉토리생성)
+sckim007@sckim007-X360:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  examples.desktop  venv
+
+sckim007@sckim007-X360:~$ ls venv
+bin  include  lib  pip-selfcheck.json
+
+5. 가상환경 활성화(프롬프트에 (venv)출력)
+sckim007@sckim007-X360:~$ source venv/bin/activate
+(venv) sckim007@sckim007-X360:~$
+
+6. 버전 선택
+# python 2 
+$ python -m virtualenv venv 
+$ virtualenv venv --python=python 
+$ virtualenv venv --python=python2.7 
+
+# python 3 
+$ python3 -m virtualenv venv 
+$ virtualenv venv --python=python3 
+$ virtualenv venv --python=python3.5
+
+6. 가상환경 비활성화
+(venv) sckim007@sckim007-X360:~$ deactivate
+sckim007@sckim007-X360:~$ 
