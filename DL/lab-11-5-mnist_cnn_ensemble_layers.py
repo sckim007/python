@@ -1,7 +1,7 @@
 # Lab 11 MNIST and Deep learning CNN
 # https://www.tensorflow.org/tutorials/layers
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
 import numpy as np
 

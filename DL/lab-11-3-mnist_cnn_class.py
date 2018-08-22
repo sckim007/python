@@ -1,6 +1,6 @@
 # Lab 11 MNIST and Deep learning CNN
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
 # import matplotlib.pyplot as plt
 

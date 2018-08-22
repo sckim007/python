@@ -76,6 +76,7 @@ print(">>>>>>>>>>", correct_vals)
 gray = cv2.imread("./one.png", cv2.IMREAD_REDUCED_GRAYSCALE_2)
 #gray = cv2.imread("./eight.jpg")
 print(">> Shape: {}".format(gray.shape))
+
 print(">>>>>>>>>>--", gray)
 gray = cv2.resize(255 - gray, (28, 28))
 print(">> Shape: {}".format(gray.shape))

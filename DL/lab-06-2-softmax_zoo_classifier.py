@@ -1,6 +1,6 @@
 import numpy as np
 
-data = np.loadtxt("./data-04-zoo.csv",
+data = np.loadtxt("data\data-04-zoo.csv",
                   delimiter=",",
                   dtype=np.float32)
 

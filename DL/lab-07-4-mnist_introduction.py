@@ -2,6 +2,7 @@
 import tensorflow as tf
 import random
 import matplotlib.pyplot as plt
+
 tf.set_random_seed(777)  # for reproducibility
 
 from tensorflow.examples.tutorials.mnist import input_data
