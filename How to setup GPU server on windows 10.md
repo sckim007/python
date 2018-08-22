@@ -12,7 +12,7 @@ cuda_9.0.176.4_windows.exe	<Patch Package>
 
 2. cudnn 7.2.1.38 설치
 <pre>
-*주소 : https://developer.nvidia.com/rdp/cudnn-download*
+<b>주소 : https://developer.nvidia.com/rdp/cudnn-download</b>
 
 "I Agree To the Terms of ..." 체크
 "Download cuDNN v7.2.1 (August 7, 2018), for CUDA 9.0" 클릭
