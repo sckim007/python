@@ -1,26 +1,26 @@
 # 설치 순서 #
 1. Cuda 9.0 Install
 <pre>
-- 주소 : https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal
+주소 : https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal
 
-- cuda_9.0.176_win10.exe		<Base Package>
-- cuda_9.0.176.1_windows.exe	<Patch>
-- cuda_9.0.176.2_windows.exe	<Patch>
-- cuda_9.0.176.3_windows.exe	<Patch>
-- cuda_9.0.176.4_windows.exe	<Patch>
+cuda_9.0.176_win10.exe		<Base Package>
+cuda_9.0.176.1_windows.exe	<Patch Package>
+cuda_9.0.176.2_windows.exe	<Patch Package>
+cuda_9.0.176.3_windows.exe	<Patch Package>
+cuda_9.0.176.4_windows.exe	<Patch Package>
 </pre>
 
 2. cudnn 7.2.1.38 설치
 <pre>
-- 주소 : https://developer.nvidia.com/rdp/cudnn-download
+*주소 : https://developer.nvidia.com/rdp/cudnn-download*
+
 "I Agree To the Terms of ..." 체크
 "Download cuDNN v7.2.1 (August 7, 2018), for CUDA 9.0" 클릭
 "cuDNN v7.2.1 Library for Windows 10" 클릭 및  다운로드
 
-- 압축해제
-cudnn-9.0-windows10-x64-v7.2.1.38.zip
+압축해제 : cudnn-9.0-windows10-x64-v7.2.1.38.zip
 
-- 파일 복사
+파일 복사
 * installpath는 압축해제한 디렉토리 path(cudnn-9.0-windows10-x64-v7.2.1.38)
 Copy <installpath>\cuda\bin\cudnn64_7.dll to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin.
 Copy <installpath>\cuda\ include\cudnn.h to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\include.
