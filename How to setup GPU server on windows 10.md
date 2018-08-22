@@ -18,9 +18,9 @@ cuda_9.0.176.4_windows.exe	<Patch Package>
 "Download cuDNN v7.2.1 (August 7, 2018), for CUDA 9.0" 클릭
 "cuDNN v7.2.1 Library for Windows 10" 클릭 및  다운로드
 
-압축해제 : cudnn-9.0-windows10-x64-v7.2.1.38.zip
+<b>압축해제 : cudnn-9.0-windows10-x64-v7.2.1.38.zip</b>
 
-파일 복사
+<b>파일 복사</b>
 * installpath는 압축해제한 디렉토리 path(cudnn-9.0-windows10-x64-v7.2.1.38)
 Copy <installpath>\cuda\bin\cudnn64_7.dll to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin.
 Copy <installpath>\cuda\ include\cudnn.h to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\include.
@@ -84,34 +84,36 @@ Device 0: "GeForce GTX 1080 Ti"
 
 9. Pycharm GitHub 연동
 <pre>
-- GitHub 계정 및 프로젝트 생성
-- ID/PWD를 이용하여 GitHup 접속
+<b>GitHub 계정 및 프로젝트 생성</b>
+</pre>
+
+<pre>
+<b>ID/PWD를 이용하여 GitHup 접속</b>
   "File" -> "Setting" -> "Version Control" ->"Git"의 "Path to Git executable" 필드에 "git.exe" Path 설정
     < Path to Git executable : C:\Program Files\Git\cmd\git.exe >
   "File" -> "Setting" -> "Version Control" ->"GitHub"에서
     < GitHub에서 생성한 ID/PWD로 Login 절차 수행 >
 </pre>
 
-최초 소스 Checkout
 <pre>
+<b>최초 소스 Checkout</b>
   "VCS" -> "Check https://github.com/sckim007/python.githttps://github.com/sckim007/python.gitout from version control" -> "Git"에서 
           < URL : https://github.com/sckim007/python.git 입력 후 Test 버튼 클릭>
           < Clone 버튼을 클릭하여 GitHub 으로부터 소스를 Checkout 받는다 >
 </pre>
 
-변경 소스 Push/Pull
 <pre>
+<b>변경 소스 Push/Pull</b>
     "VCS" -> "Update"/"Commit"
     "VCS" -> "Git" -> "Push"/"Pull"
 </pre>
 
 10. tensorflow 관련 패키지 설치
 <pre>
-- Pycharm의 "File" -> "Settings" -> "Project" -> "Project Interpreter"에서 설치
-  tensorflow 		1.8.0 또는 1.10.0
-  tensorflow-gpu 	1.8.0 또는 1.10.0
-  matplotlib 		2.2.3
-  numpy 		    1.14.5
-  opencv-python 	3.4.2.17
+<b>Pycharm의 "File" -> "Settings" -> "Project" -> "Project Interpreter"에서 설치</b>
+  tensorflow 1.8.0 또는 1.10.0
+  tensorflow-gpu 1.8.0 또는 1.10.0
+  matplotlib 2.2.3
+  numpy 1.14.5
+  opencv-python 3.4.2.17
 </pre>
-
