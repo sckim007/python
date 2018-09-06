@@ -1,6 +1,6 @@
 # Disable GPU Operation
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 # Lab 10 MNIST and Deep learning CNN
 import tensorflow as tf
@@ -177,3 +177,11 @@ plt.imshow(mnist.test.images[r:r + 1].
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(time.time() - start))
+
+###############################################################################
+# 학습 데이터(그래프 각 변수) 저장
+###############################################################################
+model_save_dir = "./model_save_dir/minist/11-X/cnn_low_memory"
+saver = tf.train.Saver()
+saver.save(sess, model_save_dir)
+sess.close()

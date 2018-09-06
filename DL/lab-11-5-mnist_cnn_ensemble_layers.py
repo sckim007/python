@@ -1,9 +1,10 @@
 # Lab 11 MNIST and Deep learning CNN
 # https://www.tensorflow.org/tutorials/layers
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
 import numpy as np
+
 
 from tensorflow.examples.tutorials.mnist import input_data
 
@@ -37,11 +38,11 @@ class Model:
             self.training = tf.placeholder(tf.bool)
 
             # input place holders
-            self.X = tf.placeholder(tf.float32, [None, 784])
+            self.X = tf.placeholder(tf.float32, [None, 784], name='X')  # modified by sckim
 
             # img 28x28x1 (black/white), Input Layer
             X_img = tf.reshape(self.X, [-1, 28, 28, 1])
-            self.Y = tf.placeholder(tf.float32, [None, 10])
+            self.Y = tf.placeholder(tf.float32, [None, 10], name='Y') # modified by sckim
 
             # Convolutional Layer #1
             conv1 = tf.layers.conv2d(inputs=X_img, filters=32, kernel_size=[3, 3],
@@ -77,6 +78,7 @@ class Model:
 
             # Logits (no activation) Layer: L5 Final FC 625 inputs -> 10 outputs
             self.logits = tf.layers.dense(inputs=dropout4, units=10)
+            tf.identity(self.logits, name='hypothesis') ### add by sckim
 
         # define cost/loss & optimizer
         self.cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
@@ -146,3 +148,11 @@ print('Ensemble accuracy:', sess.run(ensemble_accuracy))
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(time.time() - start))
+
+###############################################################################
+# 학습 데이터(그래프 각 변수) 저장
+###############################################################################
+model_save_dir = "./model_save_dir/minist/11-5/cnn_ensemble_layers"
+saver = tf.train.Saver()
+saver.save(sess, model_save_dir)
+sess.close()

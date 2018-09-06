@@ -1,6 +1,6 @@
 # Lab 11 MNIST and Deep learning CNN
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
 # import matplotlib.pyplot as plt
 
@@ -127,3 +127,11 @@ print('Accuracy:', m1.get_accuracy(mnist.test.images, mnist.test.labels))
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(time.time() - start))
+
+###############################################################################
+# 학습 데이터(그래프 각 변수) 저장
+###############################################################################
+model_save_dir = "./model_save_dir/minist/11-4/cnn_layers"
+saver = tf.train.Saver()
+saver.save(sess, model_save_dir)
+sess.close()

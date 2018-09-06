@@ -25,7 +25,7 @@ training_epochs = 15
 batch_size = 100
 
 # input place holders
-X = tf.placeholder(tf.float32, [None, 784])
+X = tf.placeholder(tf.float32, [None, 784], name= 'X')  # add name by sckim
 Y = tf.placeholder(tf.float32, [None, 10])
 
 # weights & bias for nn layers
@@ -44,6 +44,8 @@ W3 = tf.get_variable("W3", shape=[256, 10],
                      initializer=tf.contrib.layers.xavier_initializer())
 b3 = tf.Variable(tf.random_normal([10]))
 hypothesis = tf.matmul(L2, W3) + b3
+
+prediction = tf.argmax(hypothesis, 1, name= 'prediction') # add line by sckim
 
 # define cost/loss & optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(
@@ -89,3 +91,11 @@ plt.imshow(mnist.test.images[r:r + 1].
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(time.time() - start))
+
+###############################################################################
+# 학습 데이터(그래프 각 변수) 저장
+###############################################################################
+model_save_dir = "./model_save_dir/minist/10-3/nn_xavier"
+saver = tf.train.Saver()
+saver.save(sess, model_save_dir)
+sess.close()

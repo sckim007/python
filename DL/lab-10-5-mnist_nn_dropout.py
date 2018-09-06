@@ -106,3 +106,11 @@ plt.show()
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(time.time() - start))
+
+###############################################################################
+# 학습 데이터(그래프 각 변수) 저장
+###############################################################################
+model_save_dir = "./model_save_dir/minist/10-5/nn_dropout"
+saver = tf.train.Saver()
+saver.save(sess, model_save_dir)
+sess.close()

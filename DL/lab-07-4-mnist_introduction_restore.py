@@ -11,6 +11,14 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 nb_classes = 10
 
+# Assign model path and filename
+model_save_dir = "./model_save_dir/minist/07-4/"
+model_save_meta_file = model_save_dir + "introduction.meta"
+
+# Assign file and label
+file_name = "./data/three.png"
+label = 3
+
 # Create session with enabled gpu option
 config=tf.ConfigProto()
 config.gpu_options.allow_growth = True
@@ -20,8 +28,10 @@ sess = tf.Session(config=config)
 sess.run(tf.global_variables_initializer())
 
 # Restore trained model's variable
-saver = tf.train.import_meta_graph('./model_save_dir/0704-mnist.meta')
-saver.restore(sess, tf.train.latest_checkpoint('./model_save_dir'))
+#saver = tf.train.import_meta_graph('./model_save_dir/0704-mnist.meta')
+#saver.restore(sess, tf.train.latest_checkpoint('./model_save_dir'))
+saver = tf.train.import_meta_graph(model_save_meta_file)
+saver.restore(sess, tf.train.latest_checkpoint(model_save_dir))
 
 # Launch the graph in a session.
 graph = tf.get_default_graph()
@@ -72,9 +82,6 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-# Set file and label
-file_name = "./data/three.png"
-label = 3
 
 data_image = np.zeros((1, 784))
 
@@ -102,6 +109,7 @@ data_image = np.reshape(flatten, (1, 784))
 print(">> Label: ", label)
 ##print(">> Shape: {}".format(images.shape))
 
+keep_prob = tf.placeholder(tf.float32)
 print(">> Prediction: ", sess.run(
     tf.argmax(RHypothesis, 1), feed_dict={RX: data_image}))
 

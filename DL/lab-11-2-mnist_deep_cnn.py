@@ -24,12 +24,12 @@ training_epochs = 15
 batch_size = 100
 
 # dropout (keep_prob) rate  0.7~0.5 on training, but should be 1 for testing
-keep_prob = tf.placeholder(tf.float32)
+keep_prob = tf.placeholder(tf.float32, name= 'keep_prob') # add by sckim
 
 # input place holders
-X = tf.placeholder(tf.float32, [None, 784])
+X = tf.placeholder(tf.float32, [None, 784], name='X') #modified by sckim
 X_img = tf.reshape(X, [-1, 28, 28, 1])   # img 28x28x1 (black/white)
-Y = tf.placeholder(tf.float32, [None, 10])
+Y = tf.placeholder(tf.float32, [None, 10], name='Y')  #modified by sckim
 
 # L1 ImgIn shape=(?, 28, 28, 1)
 W1 = tf.Variable(tf.random_normal([3, 3, 1, 32], stddev=0.01))
@@ -87,7 +87,8 @@ W4 = tf.get_variable("W4", shape=[128 * 4 * 4, 625],
                      initializer=tf.contrib.layers.xavier_initializer())
 b4 = tf.Variable(tf.random_normal([625]))
 L4 = tf.nn.relu(tf.matmul(L3_flat, W4) + b4)
-L4 = tf.nn.dropout(L4, keep_prob=keep_prob)
+L4 = tf.nn.dropout(L4, keep_prob=keep_prob, name='L4')  # add name by sckim
+
 '''
 Tensor("Relu_3:0", shape=(?, 625), dtype=float32)
 Tensor("dropout_3/mul:0", shape=(?, 625), dtype=float32)
@@ -96,8 +97,17 @@ Tensor("dropout_3/mul:0", shape=(?, 625), dtype=float32)
 # L5 Final FC 625 inputs -> 10 outputs
 W5 = tf.get_variable("W5", shape=[625, 10],
                      initializer=tf.contrib.layers.xavier_initializer())
-b5 = tf.Variable(tf.random_normal([10]))
+
+b5 = tf.Variable(tf.random_normal([10]), name= 'b5') # add name by sckim
 logits = tf.matmul(L4, W5) + b5
+
+prediction = tf.argmax(logits, 1, name= 'prediction') # add line by sckim
+tf.identity(logits, name='logits')
+
+print("type of L4 : ", type(L4))
+print("type of W5 : ", type(W5))
+print("type of b5 : ", type(b5))
+print("type of logits : ", type(logits))
 '''
 Tensor("add_1:0", shape=(?, 10), dtype=float32)
 '''
@@ -160,3 +170,20 @@ plt.imshow(mnist.test.images[r:r + 1].
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(time.time() - start))
+
+###############################################################################
+# 학습 데이터(그래프 각 변수) 저장
+###############################################################################
+all_vars = tf.global_variables()
+print(all_vars)
+
+print("X : ", X)
+print("L4 : ", L4)
+print("W5 : ", W5)
+print("b5 : ", b5)
+print("logits : ", logits)
+
+model_save_dir = "./model_save_dir/minist/11-2/cnn_deep"
+saver = tf.train.Saver()
+saver.save(sess, model_save_dir)
+sess.close()

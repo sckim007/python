@@ -18,9 +18,6 @@ from tensorflow.examples.tutorials.mnist import input_data
 # more information about the mnist dataset
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
-print(mnist.test.images[100:100 + 1])
-exit(0)
-
 nb_classes = 10
 
 # MNIST data image of shape 28 * 28 = 784
@@ -87,9 +84,11 @@ with tf.Session(config=config) as sess:
     ###############################################################################
     # 학습 데이터(그래프 각 변수) 저장
     ###############################################################################
+    model_save_dir = "./model_save_dir/minist/07-4/introduction"
     saver = tf.train.Saver()
-    saver.save(sess, './model_save_dir/0704-mnist')
+    saver.save(sess, model_save_dir)
     sess.close()
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(time.time() - start))
+
