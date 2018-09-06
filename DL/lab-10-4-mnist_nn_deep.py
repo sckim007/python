@@ -11,6 +11,12 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 # Check out https://www.tensorflow.org/get_started/mnist/beginners for
 # more information about the mnist dataset
 
+# Print image data
+r = random.randint(0, mnist.test.num_examples - 1)
+print("example size = ", mnist.test.num_examples)
+print("image data : ", mnist.test.images[100])
+exit(0)
+
 # parameters
 learning_rate = 0.001
 training_epochs = 15

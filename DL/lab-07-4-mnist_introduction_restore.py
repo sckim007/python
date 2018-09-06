@@ -54,33 +54,39 @@ import PIL.Image as pilimg
 import numpy as np
 
 # Read image
-im = pilimg.open("./eight.jpg")
+im = pilimg.open("./data/eight.jpg")
 # Fetch image pixel data to numpy array
 pix = np.array(im)
 plt.imshow(pix)
 plt.show()
+
 pix2 = pix.reshape(1, 784)
+
 print("Label: ", 8)
 print("Prediction: ", sess.run(
     tf.argmax(RHypothesis, 1), feed_dict={RX: pix2}))
+
 '''
 
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-images = np.zeros((1, 784))
-correct_vals = np.zeros((1, 10))
-print(">>>>>>>>>>", correct_vals)
+# Set file and label
+file_name = "./data/three.png"
+label = 3
 
-gray = cv2.imread("./one.png", cv2.IMREAD_REDUCED_GRAYSCALE_2)
-#gray = cv2.imread("./eight.jpg")
-print(">> Shape: {}".format(gray.shape))
+data_image = np.zeros((1, 784))
 
-print(">>>>>>>>>>--", gray)
+gray = cv2.imread(file_name, cv2.IMREAD_REDUCED_GRAYSCALE_2)
+#gray = cv2.imread("./data/eight.jpg")
+##print(">> Shape: {}".format(gray.shape))
+
+print(">>>>>>>>>>--\n", gray)
+
 gray = cv2.resize(255 - gray, (28, 28))
-print(">> Shape: {}".format(gray.shape))
-print(">>>>>>>>>>++", gray)
+##print(">> Shape: {}".format(gray.shape))
+print(">>>>>>>>>>++\n", gray)
 
 plt.imshow(gray)
 plt.show()
@@ -88,17 +94,16 @@ plt.show()
 #cv2.imwrite("./eight_pre.png", gray)
 
 flatten = gray.flatten() / 255.0
-print(">> Shape: {}".format(flatten.shape))
-print(">>>>>>>>>>ff", flatten)
+##print(">> Shape: {}".format(flatten.shape))
+print(">>>>>>>>>>ff\n", flatten)
 
-images = np.reshape(flatten, (1, 784))
+data_image = np.reshape(flatten, (1, 784))
 
-print(">> Label: {}".format(3))
-print(">> Shape: {}".format(images.shape))
+print(">> Label: ", label)
+##print(">> Shape: {}".format(images.shape))
 
 print(">> Prediction: ", sess.run(
-    tf.argmax(RHypothesis, 1), feed_dict={RX: images}))
-
+    tf.argmax(RHypothesis, 1), feed_dict={RX: data_image}))
 
 # Close session
 sess.close()
