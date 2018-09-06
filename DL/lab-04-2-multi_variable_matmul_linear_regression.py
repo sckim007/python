@@ -1,5 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 4 Multi-variable linear regression
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 x_data = [[73., 80., 75.],
@@ -71,3 +80,6 @@ print(sess.run(hypothesis, feed_dict={X:test_data}))
 saver = tf.train.Saver()
 saver.save(sess, './model_save_dir/0402-linear')
 sess.close()
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

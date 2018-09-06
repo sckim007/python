@@ -1,8 +1,16 @@
 from __future__ import print_function
 
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
 import numpy as np
 from tensorflow.contrib import rnn
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 tf.set_random_seed(777)  # reproducibility
 
@@ -87,3 +95,6 @@ for j, result in enumerate(results):
         print(''.join([char_set[t] for t in index]), end='')
     else:
         print(char_set[index[-1]], end='')
+
+# 총 수행시간출력
+print("\nTook time >>>>>>>> ", str(time.time() - start))

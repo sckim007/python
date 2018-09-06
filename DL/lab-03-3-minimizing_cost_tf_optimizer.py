@@ -1,5 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 3 Minimizing Cost
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 # tf Graph Input
@@ -27,3 +36,6 @@ sess.run(tf.global_variables_initializer())
 for step in range(100):
     print(step, sess.run(W))
     sess.run(train)
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

@@ -1,6 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 9 XOR
 import tensorflow as tf
 import numpy as np
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 tf.set_random_seed(777)  # for reproducibility
 learning_rate = 0.1
@@ -53,3 +61,6 @@ with tf.Session() as sess:
     h, c, a = sess.run([hypothesis, predicted, accuracy],
                        feed_dict={X: x_data, Y: y_data})
     print("\nHypothesis: ", h, "\nCorrect: ", c, "\nAccuracy: ", a)
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

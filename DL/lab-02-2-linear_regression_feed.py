@@ -1,5 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 2 Linear Regression
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 # Try to find values for W and b to compute y_data = W * x_data + b
@@ -37,3 +46,6 @@ for step in range(2001):
                  feed_dict={X: [1, 2, 3], Y: [1, 2, 3]})
     if step % 20 == 0:
         print(step, cost_val, W_val, b_val)
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

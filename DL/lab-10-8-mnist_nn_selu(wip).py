@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 '''
 Tensorflow Implementation of the Scaled ELU function and Dropout
 '''
+# Disable GPU Operation
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 import numbers
 from tensorflow.contrib import layers
@@ -19,6 +22,10 @@ from tensorflow.python.ops import array_ops
 from tensorflow.python.layers import utils
 
 from tensorflow.examples.tutorials.mnist import input_data
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 tf.set_random_seed(777)  # reproducibility
 
@@ -153,4 +160,7 @@ print("Prediction: ", sess.run(
 
 plt.imshow(mnist.test.images[r:r + 1].
           reshape(28, 28), cmap='Greys', interpolation='nearest')
-plt.show()
+#plt.show()
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

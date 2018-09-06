@@ -1,10 +1,15 @@
 # Lab 11 MNIST and Deep learning CNN
-#import os
-#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
 # import matplotlib.pyplot as plt
 
 from tensorflow.examples.tutorials.mnist import input_data
+
+# 시작시간 마킹
+import time
+start = time.time()
+time.sleep(1)
 
 tf.set_random_seed(777)  # reproducibility
 
@@ -153,3 +158,6 @@ print('Learning Finished!')
 
 # Test model and check accuracy
 print('Accuracy:', m1.get_accuracy(mnist.test.images, mnist.test.labels))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

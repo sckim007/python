@@ -1,11 +1,15 @@
 # Lab 11 MNIST and Deep learning CNN
 # https://www.tensorflow.org/tutorials/layers
-#import os
-#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 import tensorflow as tf
 import numpy as np
 
 from tensorflow.examples.tutorials.mnist import input_data
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 tf.set_random_seed(777)  # reproducibility
 
@@ -139,3 +143,6 @@ ensemble_correct_prediction = tf.equal(
 ensemble_accuracy = tf.reduce_mean(
     tf.cast(ensemble_correct_prediction, tf.float32))
 print('Ensemble accuracy:', sess.run(ensemble_accuracy))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

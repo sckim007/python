@@ -1,6 +1,15 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 5 Logistic Regression Classifier
 import tensorflow as tf
 import numpy as np
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 xy = np.loadtxt('data\data-03-diabetes.csv', delimiter=',', dtype=np.float32)
@@ -68,3 +77,5 @@ with tf.Session(config=config) as sess:
     # Tensorflow session을 종료하고 자원을 반환한다.
     sess.close()
 
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

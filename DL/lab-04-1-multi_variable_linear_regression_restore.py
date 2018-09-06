@@ -30,6 +30,11 @@ RX3 = graph.get_tensor_by_name("holder_x3:0")
 #RBias = graph.get_tensor_by_name("bias:0")
 RHypothesis = graph.get_tensor_by_name("hypothesis:0")
 
+# 시작시간 마킹
+import time
+start = time.time()
+time.sleep(1)
+
 # Ask prediction for input value.
 i = 0
 for _ in y_data:
@@ -38,3 +43,6 @@ for _ in y_data:
 
 # Close session
 sess.close()
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

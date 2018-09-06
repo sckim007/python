@@ -22,8 +22,18 @@ dLoss/dW = ???
 dLoss/db = ???
 please read "Neural Net Backprop in one slide!" for deriving formulas
 """
+
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
 import numpy as np
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 # Predicting animal type based on various features
@@ -117,3 +127,6 @@ with tf.Session() as sess:
     for p, y in zip(pred, y_data):
         msg = "[{}]\t Prediction: {:d}\t True y: {:d}"
         print(msg.format(p == int(y[0]), p, int(y[0])))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

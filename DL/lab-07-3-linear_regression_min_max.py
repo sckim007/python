@@ -1,5 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
 import numpy as np
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 
@@ -120,3 +129,5 @@ for test_list_data in x_data:
 # 학습된 값을 가지고 어덯게 적용하는 것인가 ??????????????????????????????
 ##########################################################################
 
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

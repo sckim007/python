@@ -1,5 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 2 Linear Regression
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 # X and Y data
@@ -32,3 +41,6 @@ for step in range(2001):
     sess.run(train)
     if step % 20 == 0:
         print(step, sess.run(cost), sess.run(W), sess.run(b))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

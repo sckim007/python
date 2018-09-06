@@ -1,4 +1,12 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import numpy as np
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 data = np.loadtxt("data\data-04-zoo.csv",
                   delimiter=",",
@@ -119,3 +127,6 @@ for i in range(MAX_ITER):
     if i % (MAX_ITER // PRINT_N) == 0:
         acc = get_accuracy(logit, y_train_onehot)
         print("[Step: {:5}] Loss: {:<10.5} Acc: {:.2%}".format(i, loss, acc))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

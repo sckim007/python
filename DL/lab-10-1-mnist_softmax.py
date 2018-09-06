@@ -1,8 +1,17 @@
+# Disable GPU Operation
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 7 Learning rate and Evaluation
 import tensorflow as tf
 import random
 import matplotlib.pyplot as plt
 from tensorflow.examples.tutorials.mnist import input_data
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # reproducibility
 
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
@@ -75,3 +84,6 @@ print("Prediction: ", sess.run(
 plt.imshow(mnist.test.images[r:r + 1].
           reshape(28, 28), cmap='Greys', interpolation='nearest')
 plt.show()
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

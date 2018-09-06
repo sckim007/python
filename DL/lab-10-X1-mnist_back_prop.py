@@ -1,6 +1,14 @@
 # http://blog.aloni.org/posts/backprop-with-tensorflow/
 # https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b#.b3rvzhx89
+# Disable GPU Operation
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 tf.set_random_seed(777)  # reproducibility
 
@@ -22,7 +30,6 @@ def sigma(x):
     #  sigmoid function
     return tf.div(tf.constant(1.0),
                   tf.add(tf.constant(1.0), tf.exp(-x)))
-
 
 def sigma_prime(x):
     # derivative of the sigmoid function
@@ -80,3 +87,6 @@ for i in range(10000):
 # 8. Automatic differentiation in TensorFlow
 cost = diff * diff
 step = tf.train.GradientDescentOptimizer(0.1).minimize(cost)
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

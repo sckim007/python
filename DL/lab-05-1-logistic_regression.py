@@ -2,7 +2,15 @@
 Logistic Regression
 y = sigmoid(X @ W + b)
 """
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import numpy as np
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 x_data = [[1, 2],
           [2, 3],
@@ -155,5 +163,5 @@ for test_list_data in x_data:
     pred_value = np.dot(test_array_data, W) + b
     print("{0}'s prediction = {1}({2})".format(test_list_data, pred_value, get_result_str(pred_value)))
 
-
-
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

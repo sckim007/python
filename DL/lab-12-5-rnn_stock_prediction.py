@@ -1,20 +1,25 @@
 '''
 This script shows how to predict stock prices using a basic RNN
 '''
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import os
 
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # reproducibility
 
 if "DISPLAY" not in os.environ:
     # remove Travis CI Error
     matplotlib.use('Agg')
-
-
-
 
 def MinMaxScaler(data):
     ''' Min Max Normalization
@@ -117,4 +122,7 @@ with tf.Session(config=config) as sess:
     plt.plot(test_predict)
     plt.xlabel("Time Period")
     plt.ylabel("Stock Price")
-    plt.show()
+    #plt.show()
+
+# 총 수행시간출력
+print("\nTook time >>>>>>>> ", str(time.time() - start))

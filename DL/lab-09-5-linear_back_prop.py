@@ -1,7 +1,16 @@
 # http://blog.aloni.org/posts/backprop-with-tensorflow/
 # https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b#.b3rvzhx89
 # WIP
+
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 tf.set_random_seed(777)  # reproducibility
 
@@ -54,3 +63,6 @@ for i in range(1000):
     print(i, sess.run([step, RMSE], feed_dict={X: x_data, Y: y_data}))
 
 print(sess.run(hypothesis, feed_dict={X: x_data}))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

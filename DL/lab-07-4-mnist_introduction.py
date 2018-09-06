@@ -1,7 +1,15 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 7 Learning rate and Evaluation
 import tensorflow as tf
 import random
 import matplotlib.pyplot as plt
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 tf.set_random_seed(777)  # for reproducibility
 
@@ -9,6 +17,9 @@ from tensorflow.examples.tutorials.mnist import input_data
 # Check out https://www.tensorflow.org/get_started/mnist/beginners for
 # more information about the mnist dataset
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+
+print(mnist.test.images[100:100 + 1])
+exit(0)
 
 nb_classes = 10
 
@@ -33,7 +44,7 @@ is_correct = tf.equal(tf.arg_max(hypothesis, 1), tf.arg_max(Y, 1))
 accuracy = tf.reduce_mean(tf.cast(is_correct, tf.float32))
 
 # parameters
-training_epochs = 100
+training_epochs = 15
 batch_size = 100
 
 config=tf.ConfigProto()
@@ -79,3 +90,6 @@ with tf.Session(config=config) as sess:
     saver = tf.train.Saver()
     saver.save(sess, './model_save_dir/0704-mnist')
     sess.close()
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

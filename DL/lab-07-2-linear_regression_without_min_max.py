@@ -1,7 +1,15 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
 import numpy as np
-tf.set_random_seed(777)  # for reproducibility
 
+# 시작시간 마킹
+import time
+start = time.time()
+
+tf.set_random_seed(777)  # for reproducibility
 
 xy = np.array([[828.659973, 833.450012, 908100, 828.349976, 831.659973],
                [823.02002, 828.070007, 1828100, 821.655029, 828.070007],
@@ -43,3 +51,6 @@ for step in range(101):
     cost_val, hy_val, _ = sess.run(
         [cost, hypothesis, train], feed_dict={X: x_data, Y: y_data})
     print(step, "Cost: ", cost_val, "\nPrediction:\n", hy_val)
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

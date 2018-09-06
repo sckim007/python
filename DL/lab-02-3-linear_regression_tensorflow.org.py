@@ -1,5 +1,14 @@
 # From https://www.tensorflow.org/get_started/get_started
+
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
 
 # Model parameters
 W = tf.Variable([.3], tf.float32)
@@ -32,3 +41,6 @@ for i in range(1000):
 # evaluate training accuracy
 curr_W, curr_b, curr_loss = sess.run([W, b, loss], {x: x_train, y: y_train})
 print("W: %s b: %s loss: %s" % (curr_W, curr_b, curr_loss))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

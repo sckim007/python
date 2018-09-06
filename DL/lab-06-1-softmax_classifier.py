@@ -1,5 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 6 Softmax Classifier
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 x_data = [[1, 2, 1, 1],
@@ -67,3 +76,6 @@ with tf.Session(config=config) as sess:
     all = sess.run(hypothesis, feed_dict={
                    X: [[1, 11, 7, 9], [1, 3, 4, 3], [1, 1, 0, 1]]})
     print(all, sess.run(tf.argmax(all, 1)))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

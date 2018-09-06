@@ -1,5 +1,14 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 7 Learning rate and Evaluation
 import tensorflow as tf
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # for reproducibility
 
 x_data = [[1, 2, 1],
@@ -65,3 +74,6 @@ with tf.Session(config=config) as sess:
     print("Prediction:", sess.run(prediction, feed_dict={X: x_test}))
     # Calculate the accuracy
     print("Accuracy: ", sess.run(accuracy, feed_dict={X: x_test, Y: y_test}))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))

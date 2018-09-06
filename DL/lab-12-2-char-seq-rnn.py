@@ -1,6 +1,15 @@
+# Disable GPU Operation
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 12 Character Sequence RNN
 import tensorflow as tf
 import numpy as np
+
+# 시작시간 마킹
+import time
+start = time.time()
+
 tf.set_random_seed(777)  # reproducibility
 
 sample = " if you want you"
@@ -56,3 +65,6 @@ with tf.Session(config=config) as sess:
         result_str = [idx2char[c] for c in np.squeeze(result)]
 
         print(i, "loss:", l, "Prediction:", ''.join(result_str))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(time.time() - start))
