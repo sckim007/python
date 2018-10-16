@@ -27,9 +27,9 @@ batch_size = 100
 keep_prob = tf.placeholder(tf.float32, name= 'keep_prob') # add by sckim
 
 # input place holders
-X = tf.placeholder(tf.float32, [None, 784], name='X') #modified by sckim
+X = tf.placeholder(tf.float32, [None, 784], name='X') # add name by sckim
 X_img = tf.reshape(X, [-1, 28, 28, 1])   # img 28x28x1 (black/white)
-Y = tf.placeholder(tf.float32, [None, 10], name='Y')  #modified by sckim
+Y = tf.placeholder(tf.float32, [None, 10], name='Y')  # add name by sckim
 
 # L1 ImgIn shape=(?, 28, 28, 1)
 W1 = tf.Variable(tf.random_normal([3, 3, 1, 32], stddev=0.01))
@@ -87,7 +87,7 @@ W4 = tf.get_variable("W4", shape=[128 * 4 * 4, 625],
                      initializer=tf.contrib.layers.xavier_initializer())
 b4 = tf.Variable(tf.random_normal([625]))
 L4 = tf.nn.relu(tf.matmul(L3_flat, W4) + b4)
-L4 = tf.nn.dropout(L4, keep_prob=keep_prob, name='L4')  # add name by sckim
+L4 = tf.nn.dropout(L4, keep_prob=keep_prob)
 
 '''
 Tensor("Relu_3:0", shape=(?, 625), dtype=float32)
@@ -98,11 +98,10 @@ Tensor("dropout_3/mul:0", shape=(?, 625), dtype=float32)
 W5 = tf.get_variable("W5", shape=[625, 10],
                      initializer=tf.contrib.layers.xavier_initializer())
 
-b5 = tf.Variable(tf.random_normal([10]), name= 'b5') # add name by sckim
+b5 = tf.Variable(tf.random_normal([10]))
 logits = tf.matmul(L4, W5) + b5
+prediction = tf.argmax(logits, 1, name='prediction') # add line by sckim
 
-prediction = tf.argmax(logits, 1, name= 'prediction') # add line by sckim
-tf.identity(logits, name='logits')
 
 print("type of L4 : ", type(L4))
 print("type of W5 : ", type(W5))

@@ -1,18 +1,12 @@
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 7 Learning rate and Evaluation
 import tensorflow as tf
-import random
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
-'''
-tf.set_random_seed(777)  # for reproducibility
-
-from tensorflow.examples.tutorials.mnist import input_data
-# Check out https://www.tensorflow.org/get_started/mnist/beginners for
-# more information about the mnist dataset
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-'''
 # Assign path and filename
 model_save_dir = "./model_save_dir/minist/11-2/"
 model_save_meta_file = model_save_dir + "cnn_deep.meta"
@@ -27,17 +21,12 @@ label = 8
 data_image = np.zeros((1, 784))
 
 gray = cv2.imread(file_name, cv2.IMREAD_REDUCED_GRAYSCALE_2)
-print(">>>>>>>>>>--\n", gray)
-
 gray = cv2.resize(255 - gray, (28, 28))
-print(">>>>>>>>>>++\n", gray)
 
 plt.imshow(gray)
 plt.show()
 
 flatten = gray.flatten() / 255.0
-print(">>>>>>>>>>ff\n", flatten)
-
 data_image = np.reshape(flatten, (1, 784))
 
 ###############################################################################
@@ -62,22 +51,16 @@ graph = tf.get_default_graph()
 X = graph.get_tensor_by_name("X:0")
 prediction = graph.get_tensor_by_name("prediction:0")
 keep_prob = graph.get_tensor_by_name("keep_prob:0")
-'''
 
-L4 = graph.get_tensor_by_name("L4:0")
-W5 = graph.get_tensor_by_name("W5:0")
-b5 = graph.get_tensor_by_name("b5:0")
-logits = tf.matmul(L4, W5) + b5
-'''
-#logits = graph.get_tensor_by_name("logits:0")
-
-#print("X : ", X)
-#print("logits : ", logits)
+# 시작시간 마킹
+from datetime import datetime
+start = datetime.now()
 
 print(">> Label: ", label)
-
-
 print(">> Prediction: ", sess.run(prediction, feed_dict={X: data_image, keep_prob: 1.0}))
+
+# 총 수행시간출력
+print("Took time >>>>>>>> ", str(datetime.now() - start))
 
 # Close session
 sess.close()

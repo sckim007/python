@@ -28,8 +28,8 @@ batch_size = 100
 keep_prob = 0.7
 
 # input place holders
-X = tf.placeholder(tf.float32, [None, 784])
-Y = tf.placeholder(tf.float32, [None, 10])
+X = tf.placeholder(tf.float32, [None, 784], name='X')
+Y = tf.placeholder(tf.float32, [None, 10], name='Y')
 train_mode = tf.placeholder(tf.bool, name='train_mode')
 
 # layer output size
@@ -61,6 +61,7 @@ with arg_scope([fully_connected],
     hidden_layer4 = fully_connected(h3_drop, hidden_output_size, scope="h4")
     h4_drop = dropout(hidden_layer4, keep_prob, is_training=train_mode)
     hypothesis = fully_connected(h4_drop, final_output_size, activation_fn=None, scope="hypothesis")
+    prediction = tf.argmax(hypothesis, 1, name= 'prediction') # add line by sckim
 
 
 # define cost/loss & optimizer
@@ -102,7 +103,7 @@ print('Accuracy:', sess.run(accuracy, feed_dict={
 r = random.randint(0, mnist.test.num_examples - 1)
 print("Label: ", sess.run(tf.argmax(mnist.test.labels[r:r + 1], 1)))
 print("Prediction: ", sess.run(
-    tf.argmax(hypothesis, 1), feed_dict={X: mnist.test.images[r:r + 1], train_mode: False}))
+    prediction, feed_dict={X: mnist.test.images[r:r + 1], train_mode: False}))
 
 plt.imshow(mnist.test.images[r:r + 1].
           reshape(28, 28), cmap='Greys', interpolation='nearest')

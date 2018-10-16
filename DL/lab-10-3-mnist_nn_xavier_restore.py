@@ -1,3 +1,6 @@
+#import os
+#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+
 # Lab 7 Learning rate and Evaluation
 import tensorflow as tf
 import random
@@ -60,14 +63,14 @@ X = graph.get_tensor_by_name("X:0")
 prediction = graph.get_tensor_by_name("prediction:0")
 
 # 시작시간 마킹
-import time
-start = time.time()
+from datetime import datetime
+start = datetime.now()
 
 print(">> Label: ", label)
 print(">> Prediction: ", sess.run(prediction, feed_dict={X: data_image}))
 
 # 총 수행시간출력
-print("Took time >>>>>>>> ", str(time.time() - start))
+print("Took time >>>>>>>> ", str(datetime.now() - start))
 
 # Close session
 sess.close()

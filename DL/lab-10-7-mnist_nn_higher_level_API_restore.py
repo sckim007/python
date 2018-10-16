@@ -8,8 +8,8 @@ import numpy as np
 import cv2
 
 # Assign path and filename
-model_save_dir = "./model_save_dir/minist/10-4/"
-model_save_meta_file = model_save_dir + "nn_deep.meta"
+model_save_dir = "./model_save_dir/minist/10-7/"
+model_save_meta_file = model_save_dir + "nn_higher_level_api.meta"
 
 # Assign file and label
 file_name = "./data/eight.jpg"
@@ -27,7 +27,6 @@ plt.imshow(gray)
 plt.show()
 
 flatten = gray.flatten() / 255.0
-
 data_image = np.reshape(flatten, (1, 784))
 
 ###############################################################################
@@ -51,13 +50,14 @@ graph = tf.get_default_graph()
 # Read each trained variables
 X = graph.get_tensor_by_name("X:0")
 prediction = graph.get_tensor_by_name("prediction:0")
+train_mode = graph.get_tensor_by_name("train_mode:0")
 
 # 시작시간 마킹
 from datetime import datetime
 start = datetime.now()
 
 print(">> Label: ", label)
-print(">> Prediction: ", sess.run(prediction, feed_dict={X: data_image}))
+print(">> Prediction: ", sess.run(prediction, feed_dict={X: data_image, train_mode: False}))
 
 # 총 수행시간출력
 print("Took time >>>>>>>> ", str(datetime.now() - start))

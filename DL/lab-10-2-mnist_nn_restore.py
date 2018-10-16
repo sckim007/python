@@ -1,15 +1,16 @@
-#import os
-#os.environ["CUDA_VISIBLE_DEVICES"]="-1"
+import os
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 # Lab 7 Learning rate and Evaluation
 import tensorflow as tf
+import random
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
 # Assign path and filename
-model_save_dir = "./model_save_dir/minist/10-4/"
-model_save_meta_file = model_save_dir + "nn_deep.meta"
+model_save_dir = "./model_save_dir/minist/10-2/"
+model_save_meta_file = model_save_dir + "nn.meta"
 
 # Assign file and label
 file_name = "./data/eight.jpg"
@@ -53,14 +54,11 @@ X = graph.get_tensor_by_name("X:0")
 prediction = graph.get_tensor_by_name("prediction:0")
 
 # 시작시간 마킹
-from datetime import datetime
-start = datetime.now()
-
+import time
+start = time.time()
 print(">> Label: ", label)
 print(">> Prediction: ", sess.run(prediction, feed_dict={X: data_image}))
-
-# 총 수행시간출력
-print("Took time >>>>>>>> ", str(datetime.now() - start))
+print("Took time >>>>>>>> ", str(time.time() - start))
 
 # Close session
 sess.close()

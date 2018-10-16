@@ -26,11 +26,11 @@ batch_size = 100
 total_batch = int(mnist.train.num_examples / batch_size)
 
 # input place holders
-X = tf.placeholder(tf.float32, [None, 784])
-Y = tf.placeholder(tf.float32, [None, 10])
+X = tf.placeholder(tf.float32, [None, 784], name= 'X')  # add name by sckim
+Y = tf.placeholder(tf.float32, [None, 10], name= 'Y')   # add name by sckim
 
 # dropout (keep_prob) rate  0.7 on training, but should be 1 for testing
-keep_prob = tf.placeholder(tf.float32)
+keep_prob = tf.placeholder(tf.float32, name = 'keep_prob')
 
 # weights & bias for nn layers
 # http://stackoverflow.com/questions/33640581/how-to-do-xavier-initialization-on-tensorflow
@@ -62,6 +62,8 @@ W5 = tf.get_variable("W5", shape=[512, 10],
                      initializer=tf.contrib.layers.xavier_initializer())
 b5 = tf.Variable(tf.random_normal([10]))
 hypothesis = tf.matmul(L4, W5) + b5
+
+prediction = tf.argmax(hypothesis, 1, name = 'prediction') # add line by sckim
 
 # define cost/loss & optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(

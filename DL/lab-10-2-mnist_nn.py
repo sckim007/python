@@ -26,8 +26,8 @@ training_epochs = 15
 batch_size = 100
 
 # input place holders
-X = tf.placeholder(tf.float32, [None, 784])
-Y = tf.placeholder(tf.float32, [None, 10])
+X = tf.placeholder(tf.float32, [None, 784], name= 'X')  # add name by sckim
+Y = tf.placeholder(tf.float32, [None, 10], name= 'X')   # add name by sckim
 
 # weights & bias for nn layers
 W1 = tf.Variable(tf.random_normal([784, 256]))
@@ -41,6 +41,8 @@ L2 = tf.nn.relu(tf.matmul(L1, W2) + b2)
 W3 = tf.Variable(tf.random_normal([256, 10]))
 b3 = tf.Variable(tf.random_normal([10]))
 hypothesis = tf.matmul(L2, W3) + b3
+
+prediction = tf.argmax(hypothesis, 1, name= 'prediction')  # add line by sckim
 
 # define cost/loss & optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(

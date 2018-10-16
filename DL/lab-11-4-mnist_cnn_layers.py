@@ -21,7 +21,6 @@ learning_rate = 0.001
 training_epochs = 15
 batch_size = 100
 
-
 class Model:
 
     def __init__(self, sess, name):

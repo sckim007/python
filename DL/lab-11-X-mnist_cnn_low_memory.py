@@ -25,12 +25,12 @@ training_epochs = 15
 batch_size = 100
 
 # dropout (keep_prob) rate  0.7~0.5 on training, but should be 1 for testing
-keep_prob = tf.placeholder(tf.float32)
+keep_prob = tf.placeholder(tf.float32, name='keep_prob')  # add name by sckim
 
 # input place holders
-X = tf.placeholder(tf.float32, [None, 784])
+X = tf.placeholder(tf.float32, [None, 784], name='X')     # add name by sckim
 X_img = tf.reshape(X, [-1, 28, 28, 1])   # img 28x28x1 (black/white)
-Y = tf.placeholder(tf.float32, [None, 10])
+Y = tf.placeholder(tf.float32, [None, 10], name='Y')      # add name by sckim
 
 # L1 ImgIn shape=(?, 28, 28, 1)
 W1 = tf.Variable(tf.random_normal([3, 3, 1, 32], stddev=0.01))
@@ -99,6 +99,7 @@ W5 = tf.get_variable("W5", shape=[625, 10],
                      initializer=tf.contrib.layers.xavier_initializer())
 b5 = tf.Variable(tf.random_normal([10]))
 hypothesis = tf.matmul(L4, W5) + b5
+prediction = tf.argmax(hypothesis, 1, name='prediction')    # add line by sckim
 '''
 Tensor("add_1:0", shape=(?, 10), dtype=float32)
 '''
@@ -168,9 +169,8 @@ print("\nGet one and predict")
 print("-------------------------------")
 r = random.randint(0, mnist.test.num_examples - 1)
 print("Label: ", sess.run(tf.argmax(mnist.test.labels[r:r + 1], 1)))
-print("Prediction: ", sess.run(
-    tf.argmax(hypothesis, 1), {X: mnist.test.images[r:r + 1], keep_prob: 1}))
-
+print("Prediction: ",
+      sess.run(prediction, {X: mnist.test.images[r:r + 1], keep_prob: 1}))
 plt.imshow(mnist.test.images[r:r + 1].
           reshape(28, 28), cmap='Greys', interpolation='nearest')
 #plt.show()
