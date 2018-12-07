@@ -65,7 +65,6 @@ class SystemMonitoringServer(asyncio.Protocol):
             message = json.loads(data)
         except TypeError:
             print("[Error] Unable to serialize the objects")
-        '''
         else:
             print('HOSTNAME : ', message['hostname'])
             print('CPU      : ', message['cpu'])
@@ -75,7 +74,6 @@ class SystemMonitoringServer(asyncio.Protocol):
             print('NETWORKS :')
             for n in message['networks']:
                 print('\t', str(n))
-        '''
 
 class EventThread(threading.Thread):
     def __init__(self, event, interval):
@@ -91,10 +89,10 @@ class EventThread(threading.Thread):
     def report(self):
         if len(clients) == 0:
             print("Not exist client connection")
-'''            
+
         for client in clients:
             print("client recv byte: ", client.recv_bytes)
-'''
+
 '''
         for client in self.server.remote_clients:
             print("Client: %s " % (str(client.addr)),

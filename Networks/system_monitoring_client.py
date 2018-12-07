@@ -53,7 +53,6 @@ class SystemMonitoringClient(asyncio.Protocol):
             message = json.dumps(self.system_resources)
         except TypeError:
             print("Unable to serialize the objects")
-        '''
         else:
             self.send_bytes = len(message.encode())
             self.send_count += 1
@@ -61,7 +60,6 @@ class SystemMonitoringClient(asyncio.Protocol):
 
             if self.send_count % 10 == 0:
                 print('Data sent: sent_count: {}'.format(self.send_count))
-        '''
 
     def data_received(self, data):
         self.recv_count += 1
@@ -70,11 +68,9 @@ class SystemMonitoringClient(asyncio.Protocol):
             print("Error : not the same length of send/recv bytes")
             print("Sent: {0}, Recv: {1} ".format(self.send_bytes, recv_length))
             self.loop.stop()
-        '''
         else:
             if self.recv_count % 10 == 0:
                 print('Data recv: recv_count: {}'.format(self.recv_count))
-        '''
 
     def connection_lost(self, exc):
         print('The server closed the connection')
@@ -159,7 +155,7 @@ class EventThread(threading.Thread):
             self.report()
 
     def report(self):
-        #print("<<<<<<<<<<<< Report >>>>>>>>>>>>>>>")
+        print("<<<<<<<<<<<< Report >>>>>>>>>>>>>>>")
         self.client.data_send()
 
 def main():
